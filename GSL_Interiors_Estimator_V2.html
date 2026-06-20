@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GSL Interiors Cost Estimator V2</title>
+<style>
+body{font-family:Arial,sans-serif;background:#eef3f8;margin:0;padding:15px}
+.wrap{max-width:950px;margin:auto}
+.hero{background:linear-gradient(135deg,#0d47a1,#42a5f5);color:#fff;padding:25px;border-radius:20px;text-align:center}
+.card{background:#fff;margin-top:15px;padding:18px;border-radius:18px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+h2{margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.item{padding:12px;border:2px solid #ddd;border-radius:12px;background:#fafafa}
+select,button,input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc}
+.btn{background:#43a047;color:#fff;border:none;font-size:18px}
+.result{background:linear-gradient(135deg,#1565c0,#1e88e5);color:#fff;border-radius:20px;padding:20px;text-align:center;margin-top:15px}
+.summary{background:#f5f5f5;border-radius:10px;padding:10px;margin-top:10px}
+.links a{display:inline-block;margin:5px;padding:10px 14px;color:#fff;text-decoration:none;border-radius:8px}
+.w{background:#25D366}.c{background:#1565c0}.e{background:#ef6c00}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<h1>GSL Interiors Cost Estimator</h1>
+<p>Designing Beautiful Spaces for Better Living</p>
+</div>
+
+<div class="card">
+<h2>Property Details</h2>
+<select id="area">
+<option value="0">1000 SFT</option>
+<option value="50000">1200 SFT</option>
+<option value="100000">1500 SFT</option>
+<option value="150000">1800 SFT</option>
+<option value="200000">2000+ SFT</option>
+</select>
+</div>
+
+<div class="card">
+<h2>Select Items</h2>
+<div class="grid">
+<label class="item"><input type="checkbox" value="60000"> Bedroom 1 Wardrobe</label>
+<label class="item"><input type="checkbox" value="60000"> Bedroom 2 Wardrobe</label>
+<label class="item"><input type="checkbox" value="60000"> Bedroom 3 Wardrobe</label>
+<label class="item"><input type="checkbox" value="60000"> Bedroom 4 Wardrobe</label>
+<label class="item"><input type="checkbox" value="50000"> Modular Kitchen</label>
+<label class="item"><input type="checkbox" value="30000"> TV Unit</label>
+<label class="item"><input type="checkbox" value="40000"> Crockery Unit</label>
+<label class="item"><input type="checkbox" value="15000"> Utility Unit</label>
+<label class="item"><input type="checkbox" value="20000"> Pooja Unit</label>
+<label class="item"><input type="checkbox" value="15000"> Shoe Rack</label>
+<label class="item"><input type="checkbox" value="15000"> Study Table</label>
+<label class="item"><input type="checkbox" value="20000"> Dressing Unit</label>
+<label class="item"><input type="checkbox" value="25000"> Loft Storage</label>
+<label class="item"><input type="checkbox" value="50000"> False Ceiling</label>
+</div>
+</div>
+
+<div class="card">
+<h2>Package Selection</h2>
+<select id="pkg">
+<option value="1">Standard</option>
+<option value="1.25">Medium</option>
+<option value="1.5">Premium</option>
+</select>
+</div>
+
+<div class="card">
+<button class="btn" onclick="calc()">Calculate Estimate</button>
+</div>
+
+<div id="result" class="result">
+<h2>Estimated Project Cost</h2>
+<h1>₹ 0</h1>
+<p>Approximate Estimate</p>
+</div>
+
+<div class="card">
+<h2>Selected Items Summary</h2>
+<div id="summary" class="summary">No items selected.</div>
+</div>
+
+<div class="card links" style="text-align:center">
+<a class="w" href="https://wa.me/919999999999">WhatsApp</a>
+<a class="c" href="tel:+919999999999">Call</a>
+<a class="e" href="mailto:gslconstructns28@gmail.com">Email</a>
+</div>
+</div>
+
+<script>
+function calc(){
+let total=Number(document.getElementById('area').value);
+let names=[];
+document.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+ if(cb.checked){ total+=Number(cb.value); names.push(cb.parentNode.innerText.trim()); }
+});
+total=Math.round(total*Number(document.getElementById('pkg').value));
+document.getElementById('result').innerHTML='<h2>Estimated Project Cost</h2><h1>₹ '+total.toLocaleString('en-IN')+'</h1><p>Approximate Estimate</p>';
+document.getElementById('summary').innerHTML=names.length?names.join('<br>'):'No items selected.';
+}
+</script>
+</body>
+</html>
